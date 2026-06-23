@@ -1,11 +1,214 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const sabores = [
+	{ emoji: '🍓', nombre: 'Fresa', desc: 'Fresas frescas de temporada' },
+	{ emoji: '🍫', nombre: 'Chocolate', desc: 'Cacao intenso belga' },
+	{ emoji: '🍦', nombre: 'Vainilla', desc: 'Vainilla de Madagascar' },
+	{ emoji: '🍋', nombre: 'Limón', desc: 'Sorbete cítrico y refrescante' },
+	{ emoji: '🍑', nombre: 'Durazno', desc: 'Cremoso y natural' },
+	{ emoji: '🍪', nombre: 'Cookies', desc: 'Galleta y crema' },
+];
 ---
 
 <Layout>
-	<Welcome />
+	<main>
+		<!-- Hero -->
+		<section class="hero">
+			<nav>
+				<span class="logo">🍨 Dolce</span>
+				<a class="nav-cta" href="#sabores">Ver sabores</a>
+			</nav>
+			<div class="hero-content">
+				<h1>Helados artesanales<br />hechos con amor</h1>
+				<p>Ingredientes naturales, recetas de siempre y el sabor que te transporta a la infancia.</p>
+				<a class="btn" href="#sabores">Descubre nuestros sabores</a>
+			</div>
+		</section>
+
+		<!-- Sabores -->
+		<section id="sabores" class="sabores">
+			<h2>Nuestros sabores</h2>
+			<p class="subtitle">Más de 20 variedades, siempre frescas.</p>
+			<div class="grid">
+				{sabores.map((s) => (
+					<article class="card">
+						<span class="emoji">{s.emoji}</span>
+						<h3>{s.nombre}</h3>
+						<p>{s.desc}</p>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section class="cta">
+			<h2>¿Listo para darte un gusto?</h2>
+			<p>Visítanos o pide a domicilio. ¡Te esperamos!</p>
+			<a class="btn" href="#">Pide ahora</a>
+		</section>
+
+		<footer>
+			<p>🍨 Dolce — Calle Helado 123 · Abierto todos los días 12:00–22:00</p>
+		</footer>
+	</main>
 </Layout>
+
+<style>
+	:global(body) {
+		font-family: system-ui, -apple-system, sans-serif;
+		color: #4a2c4d;
+	}
+
+	main {
+		min-height: 100%;
+	}
+
+	/* Hero */
+	.hero {
+		background: linear-gradient(160deg, #ffe0ec 0%, #fff5e6 100%);
+		padding: 1.5rem clamp(1rem, 5vw, 4rem) 5rem;
+	}
+
+	nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 4rem;
+	}
+
+	.logo {
+		font-size: 1.5rem;
+		font-weight: 800;
+	}
+
+	.nav-cta {
+		text-decoration: none;
+		color: #d6336c;
+		font-weight: 600;
+	}
+
+	.hero-content {
+		max-width: 640px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.hero-content h1 {
+		font-size: clamp(2.2rem, 6vw, 3.5rem);
+		line-height: 1.1;
+		margin: 0 0 1rem;
+	}
+
+	.hero-content p {
+		font-size: 1.15rem;
+		opacity: 0.8;
+		margin-bottom: 2rem;
+	}
+
+	.btn {
+		display: inline-block;
+		background: #d6336c;
+		color: #fff;
+		text-decoration: none;
+		padding: 0.9rem 2rem;
+		border-radius: 999px;
+		font-weight: 600;
+		transition: transform 0.15s ease, box-shadow 0.15s ease;
+		box-shadow: 0 6px 18px rgba(214, 51, 108, 0.3);
+	}
+
+	.btn:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 24px rgba(214, 51, 108, 0.4);
+	}
+
+	/* Sabores */
+	.sabores {
+		padding: 5rem clamp(1rem, 5vw, 4rem);
+		text-align: center;
+	}
+
+	.sabores h2 {
+		font-size: 2.2rem;
+		margin: 0 0 0.5rem;
+	}
+
+	.subtitle {
+		opacity: 0.7;
+		margin-bottom: 3rem;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		gap: 1.5rem;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.card {
+		background: #fff;
+		border: 1px solid #ffe0ec;
+		border-radius: 1.25rem;
+		padding: 2rem 1rem;
+		transition: transform 0.15s ease, box-shadow 0.15s ease;
+	}
+
+	.card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 28px rgba(214, 51, 108, 0.15);
+	}
+
+	.emoji {
+		font-size: 3rem;
+		display: block;
+		margin-bottom: 0.75rem;
+	}
+
+	.card h3 {
+		margin: 0 0 0.35rem;
+	}
+
+	.card p {
+		margin: 0;
+		font-size: 0.9rem;
+		opacity: 0.7;
+	}
+
+	/* CTA */
+	.cta {
+		background: linear-gradient(160deg, #d6336c, #f06595);
+		color: #fff;
+		text-align: center;
+		padding: 5rem 1.5rem;
+	}
+
+	.cta h2 {
+		font-size: 2.2rem;
+		margin: 0 0 0.5rem;
+	}
+
+	.cta p {
+		opacity: 0.9;
+		margin-bottom: 2rem;
+	}
+
+	.cta .btn {
+		background: #fff;
+		color: #d6336c;
+	}
+
+	/* Footer */
+	footer {
+		text-align: center;
+		padding: 2rem 1rem;
+		background: #4a2c4d;
+		color: #ffd6e7;
+		font-size: 0.9rem;
+	}
+
+	footer p {
+		margin: 0;
+	}
+</style>
